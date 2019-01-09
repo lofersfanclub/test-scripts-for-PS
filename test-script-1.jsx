@@ -20,6 +20,37 @@ function main() {
   scaleImage();
 }
 
+// New UI window
+var cal = new Window ("dialog", "Blah!");
+var cal_char = cal.add("edittext", [25,40,135,60], "asdf");
+var slider0 = cal.add('slider', undefined, 50,0,200);
+var dropdown = cal.add("dropdownlist", undefined, ["A", "B", "C"]);
+
+// buttons
+var btnGroup = cal.add ("group");
+btnGroup.orientation = "row";
+btnGroup.alignment = "center";
+btnGroup.add ("button", undefined, "OK");
+btnGroup.add ("button", undefined, "Cancel", {name:'close'});
+cal.center();
+
+var myReturn = cal.show();
+alert(myReturn);
+
+if (myReturn == 1)
+{
+    // set checkboxes and input here
+    var chars = cal_char.text;
+    var slider = slider0.value;
+    alert("You wrote: '" + chars + "' with the value: " + slider);
+}
+else {
+    alert(myReturn);
+}
+
+
+
+
 function loopLayers(ref){
     var layers = ref.layers;
     var len = layers.length;
@@ -135,7 +166,7 @@ function exportPng24AM(fileName, options) {
     desc2.putBoolean(app.charIDToTypeID("SSSO"), false);
     desc2.putList(app.charIDToTypeID("SSLt"), new ActionList());
     desc2.putBoolean(app.charIDToTypeID("DIDr"), false);
-    desc2.putPath(app.charIDToTypeID("In  "), new File(fileName));
+    desc2.putPath(app.charIDToTypeID("In  "), new File("savedImage"));
     desc.putObject(app.charIDToTypeID("Usng"), app.stringIDToTypeID("SaveForWeb"), desc2);
     app.executeAction(app.charIDToTypeID("Expr"), desc, DialogModes.NO);
 }
